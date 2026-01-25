@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+body { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+}
+
+/* Glassmorphism Effect */
+.glass { 
+    background: rgba(255, 255, 255, 0.7); 
+    backdrop-filter: blur(10px); 
+}
+
+.dark .glass {
+    background: rgba(15, 23, 42, 0.8);
+}
+
+/* Background Grid Pattern */
+.bg-grid { 
+    background-image: radial-gradient(#e5e7eb 1px, transparent 1px); 
+    background-size: 20px 20px; 
+}
+
+.dark .bg-grid-dark {
+    background-image: radial-gradient(#1e293b 1px, transparent 1px);
+}
+
+/* Profile Photo Hover */
+.profile-photo {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: grayscale(10%);
+}
+
+.profile-photo:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05) rotate(1deg);
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}

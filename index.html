@@ -1,213 +1,233 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ferdian Dwi Putra | Backend & Web Developer</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <style>
-        /* Custom styles for smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-        /* Style for project cards if you want to add more flair */
-        .project-card {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-    </style>
-</head>
-<body class="font-sans antialiased text-gray-800 bg-gray-50">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 
-    <header id="home" class="relative bg-gradient-to-r from-red-700 to-red-900 text-white py-16 md:py-24">
-        <div class="container mx-auto px-6 text-center">
-            <img src="Ferdian.png" alt="Ferdian Dwi Putra" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white shadow-lg">
-            <h1 class="text-4xl md:text-5xl font-bold mb-2">Ferdian Dwi Putra</h1>
-            <p class="text-xl md:text-2xl mb-6">Backend & Web Developer</p>
-            <p class="text-lg mb-8 max-w-2xl mx-auto">Membangun sistem scalable dan high-performance dengan fokus pada efisiensi dan inovasi.</p>
-            <div class="space-x-4">
-                <a href="#projects" class="bg-white text-red-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors">Lihat Proyek Saya</a>
-                <a href="#contact" class="border border-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-red-700 transition-colors">Hubungi Saya</a>
+    <script>
+        tailwind.config = { darkMode: 'class' }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark')
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased transition-colors duration-300">
+
+    <nav x-data="navHandler" @scroll.window="handleScroll"
+         :class="scrolled ? 'bg-slate-950 border-b-2 border-fuchsia-600 shadow-[0_4px_20px_rgba(192,38,211,0.5)] py-3' : 'bg-slate-950 py-5 border-b border-slate-800'"
+         class="fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <span class="text-xl font-bold tracking-tighter text-red-600">FDP.DEV</span>
+            <div class="hidden md:flex space-x-8 font-medium text-sm uppercase tracking-wider">
+                <a href="#home" class="hover:text-fuchsia-400 transition">Home</a>
+                <a href="#about" class="hover:text-fuchsia-400 transition">About</a>
+                <a href="#projects" class="hover:text-fuchsia-400 transition">Projects</a>
+                <a href="#experience" class="hover:text-fuchsia-400 transition">Experience</a>
+                <a href="#contact" class="hover:text-fuchsia-400 transition">Contact</a>
             </div>
-            <div class="mt-8">
-                <a href="https://www.linkedin.com/in/ferdiandwp" target="_blank" class="text-white hover:text-gray-300 mx-3">LinkedIn</a>
-                <a href="mailto:ferdiandwiputra01@gmail.com" class="text-white hover:text-gray-300 mx-3">Email</a>
-                <a href="https://github.com/FerdianDwiputra" target="_blank" class="text-white hover:text-gray-300 mx-3">GitHub</a>
+            <button @click="open = !open" class="md:hidden text-2xl text-fuchsia-500"><i class="fas fa-bars"></i></button>
+        </div>
+        <div x-show="open" class="md:hidden bg-slate-900 border-b border-fuchsia-600 p-6 space-y-4 shadow-xl">
+            <a @click="open = false" href="#home" class="block font-semibold">Home</a>
+            <a @click="open = false" href="#about" class="block font-semibold">About</a>
+            <a @click="open = false" href="#projects" class="block font-semibold">Projects</a>
+            <a @click="open = false" href="#experience" class="block font-semibold">Experience</a>
+            <a @click="open = false" href="#contact" class="block font-semibold">Contact</a>
+        </div>
+    </nav>
+
+    <header id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-grid dark:bg-grid-cyber">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-slate-50/50 dark:to-slate-950/90"></div>
+        <div class="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center">
+            <div class="md:w-2/3 text-center md:text-left">
+                <span class="inline-block px-4 py-1.5 mb-4 text-[10px] font-bold tracking-widest text-fuchsia-400 uppercase bg-fuchsia-900/30 border border-fuchsia-500/50 rounded-md">
+                    IT Developer Protocol Active
+                </span>
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+                    Crafting <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-fuchsia-600">Scalable</span> Backend Systems.
+                </h1>
+                <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-xl leading-relaxed">
+                    Membangun sistem scalable dan high-performance dengan fokus pada efisiensi dan inovasi.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#projects" class="px-8 py-4 bg-red-700 text-white rounded-lg font-bold hover:bg-red-800 transition border border-red-500/50 text-center">Lihat Proyek</a>
+                    <a href="#contact" class="px-8 py-4 border border-fuchsia-500/50 text-fuchsia-400 rounded-lg font-bold hover:bg-fuchsia-500/10 transition text-center shadow-[0_0_10px_rgba(192,38,211,0.2)]">Hubungi Saya</a>
+                </div>
+            </div>
+            <div class="md:w-1/3 mt-12 md:mt-0 flex justify-center">
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-fuchsia-600/20 rounded-full blur-3xl animate-pulse"></div>
+                    <img src="Ferdian.png" alt="Ferdian" class="profile-photo relative w-64 h-64 md:w-80 md:h-80 object-cover rounded-full border-4 border-fuchsia-600/50 z-10">
+                </div>
             </div>
         </div>
     </header>
 
-    <section id="about" class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Tentang Saya</h2>
-            <p class="text-lg text-gray-700 leading-relaxed mb-8">
-                Backend Developer berpengalaman lebih dari 2 tahun dengan rekam jejak terbukti dalam membangun sistem yang scalable dan high-performance. Mampu menyelesaikan proyek 2-3x lebih cepat dari target, didukung oleh kemampuan problemsolving dan efisiensi kerja yang kuat. Memiliki antusiasme tinggi terhadap arsitektur backend dan teknologi baru, serta pemahaman solid tentang UI/UX dengan 70% kontribusi desain diterima perusahaan. Saya seorang individu yang kolaboratif, adaptif, dan mampu berkembang pesat dalam lingkungan kerja yang dinamis.
-            </p>
-
-            <h3 class="text-2xl font-bold mb-6 text-center">Keahlian Teknis</h3>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 text-center">
-                <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                    <p class="font-semibold text-red-700">Bahasa Pemrograman</p>
-                    <p>PHP, Javascript, Typescript, Python/Azure</p>
-                </div>
-                <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                    <p class="font-semibold text-red-700">Framework/Library</p>
-                    <p>Laravel, Tailwind</p>
-                </div>
-                <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                    <p class="font-semibold text-red-700">Database</p>
-                    <p>MySQL, PostgreSQL</p>
-                </div>
-                <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                    <p class="font-semibold text-red-700">Pengembangan API</p>
-                    <p>RESTful API</p>
-                </div>
-                <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                    <p class="font-semibold text-red-700">Server & Deployment</p>
-                    <p>Konfigurasi Server, Deployment</p>
-                </div>
-                <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                    <p class="font-semibold text-red-700">UI/UX Tools</p>
-                    <p>Figma</p>
-                </div>
-                <div class="bg-gray-100 p-4 rounded-lg shadow-sm col-span-2 md:col-span-1 lg:col-span-2">
-                    <p class="font-semibold text-red-700">Alat Digital & Teknologi</p>
-                    <p>AI, Microsoft 365 (Copilot), Google Workspace, Sistem Otomasi. <span class="text-sm italic">(Mempelajari PowerApps & Power BI)</span></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="py-16 md:py-24 bg-gray-100">
+    <section id="about" class="py-24 bg-white dark:bg-slate-900/50">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Proyek Pilihan</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row project-card">
-                    <div class="md:w-1/3 p-4 flex items-center justify-center bg-red-700">
-                        <img src="Qurbany.png" alt="Qurbany Logo" class="max-h-24 max-w-full">
+            <div class="max-w-4xl mx-auto text-center mb-16">
+                <h2 class="text-3xl font-bold mb-6">Tentang Saya</h2>
+                <p class="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+                    Backend Developer berpengalaman lebih dari 2 tahun dengan rekam jejak terbukti dalam membangun sistem yang scalable dan high-performance. Mampu menyelesaikan proyek 2-3x lebih cepat dari target, didukung oleh kemampuan problem solving dan efisiensi kerja yang kuat. Memiliki pemahaman solid tentang UI/UX dengan 70% kontribusi desain diterima perusahaan.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="p-6 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-red-500/50 transition-all group">
+                    <div class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <i class="fas fa-code text-red-600 dark:text-red-500 text-xl"></i>
                     </div>
-                    <div class="p-6 md:w-2/3">
+                    <p class="font-bold text-slate-800 dark:text-white mb-1">Bahasa Pemrograman</p>
+                    <p class="text-xs text-slate-500">PHP, JS, TS, Python/Azure</p>
+                </div>
+
+                <div class="p-6 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-red-500/50 transition-all group">
+                    <div class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <i class="fas fa-layer-group text-red-600 dark:text-red-500 text-xl"></i>
+                    </div>
+                    <p class="font-bold text-slate-800 dark:text-white mb-1">Framework/Library</p>
+                    <p class="text-xs text-slate-500">Laravel, Tailwind, InertiaJS</p>
+                </div>
+
+                <div class="p-6 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-red-500/50 transition-all group">
+                    <div class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <i class="fas fa-database text-red-600 dark:text-red-500 text-xl"></i>
+                    </div>
+                    <p class="font-bold text-slate-800 dark:text-white mb-1">Database</p>
+                    <p class="text-xs text-slate-500">MySQL, PostgreSQL, SQL Server</p>
+                </div>
+
+                <div class="p-6 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-red-500/50 transition-all group">
+                    <div class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <i class="fas fa-screwdriver-wrench text-red-600 dark:text-red-500 text-xl"></i>
+                    </div>
+                    <p class="font-bold text-slate-800 dark:text-white mb-1">Alat & Teknologi</p>
+                    <p class="text-xs text-slate-500">Figma, AI, Docker, Power BI</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 bg-slate-50 dark:bg-slate-950">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">Proyek Pilihan</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-fuchsia-500/50 transition duration-500">
+                    <div class="h-48 bg-red-700 flex items-center justify-center"><img src="Qurbany.png" class="w-32" alt="Qurbany"></div>
+                    <div class="p-8">
                         <h3 class="text-xl font-bold mb-2">Qurbany</h3>
-                        <p class="text-gray-700 mb-4">Mengembangkan aplikasi mobile untuk transaksi kurban online, memastikan sistem yang efisien dan andal dengan pembayaran aman dan proses halal.</p>
-                        <p class="text-sm text-gray-500 mb-4">Teknologi: PHP, Laravel, API</p>
-                        <a href="#" class="text-red-700 hover:underline font-semibold">Lihat Detail / Kunjungi Situs</a>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Aplikasi mobile transaksi kurban online dengan sistem andal, pembayaran aman, dan proses halal.</p>
+                        <p class="text-[10px] font-bold text-fuchsia-500 uppercase tracking-widest">PHP, Laravel, API</p>
                     </div>
                 </div>
-
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row project-card">
-                    <div class="md:w-1/3 p-4 flex items-center justify-center bg-orange-500">
-                        <img src="Ortani.png" alt="HaiOrtani Logo" class="max-h-24 max-w-full">
-                    </div>
-                    <div class="p-6 md:w-2/3">
+                <div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-fuchsia-500/50 transition duration-500">
+                    <div class="h-48 bg-orange-500 flex items-center justify-center"><img src="Ortani.png" class="w-32" alt="HaiOrtani"></div>
+                    <div class="p-8">
                         <h3 class="text-xl font-bold mb-2">HaiOrtani</h3>
-                        <p class="text-gray-700 mb-4">Membangun platform e-commerce perlengkapan pertanian dengan toko aktif di Tokopedia dan Shopee, berfokus pada pupuk dan produk pertanian.</p>
-                        <p class="text-sm text-gray-500 mb-4">Teknologi: Javascript, React.js, Integrasi API E-commerce</p>
-                        <a href="#" class="text-red-700 hover:underline font-semibold">Lihat Detail / Kunjungi Situs</a>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">E-commerce perlengkapan pertanian aktif di Tokopedia dan Shopee, berfokus pada pupuk dan produk pertanian.</p>
+                        <p class="text-[10px] font-bold text-fuchsia-500 uppercase tracking-widest">Javascript, React.js, API</p>
                     </div>
                 </div>
-
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row project-card">
-                    <div class="md:w-1/3 p-4 flex items-center justify-center bg-green-700">
-                        <img src="Jannahku.png" alt="JannahKu Logo" class="max-h-24 max-w-full">
-                    </div>
-                    <div class="p-6 md:w-2/3">
+                <div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-fuchsia-500/50 transition duration-500">
+                    <div class="h-48 bg-green-700 flex items-center justify-center"><img src="Jannahku.png" class="w-32" alt="JannahKu"></div>
+                    <div class="p-8">
                         <h3 class="text-xl font-bold mb-2">JannahKu</h3>
-                        <p class="text-gray-700 mb-4">Berkontribusi pada platform perjodohan dan edukasi keluarga, menghubungkan pengguna dan menyediakan akses ke ahli topik pranikah, rumah tangga, dan pengasuhan anak.</p>
-                        <p class="text-sm text-gray-500 mb-4">Teknologi: PHP, Laravel, Video Streaming Integration</p>
-                        <a href="#" class="text-red-700 hover:underline font-semibold">Lihat Detail / Kunjungi Situs</a>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Platform perjodohan dan edukasi keluarga dengan akses ke ahli pranikah dan rumah tangga.</p>
+                        <p class="text-[10px] font-bold text-fuchsia-500 uppercase tracking-widest">PHP, Laravel, Video Streaming</p>
                     </div>
                 </div>
-
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row project-card">
-                    <div class="md:w-1/3 p-4 flex items-center justify-center bg-blue-700">
-                        <img src="Lims.png" alt="LIMS Logo" class="max-h-24 max-w-full">
-                    </div>
-                    <div class="p-6 md:w-2/3">
-                        <h3 class="text-xl font-bold mb-2">LIMS (Laboratory Information Management System)</h3>
-                        <p class="text-gray-700 mb-4">Mengembangkan sistem berbasis web untuk manajemen pengujian laboratorium, dengan fitur integrasi VPN aman, kontrol akses berbasis peran, dan pembuatan kode sampel otomatis.</p>
-                        <p class="text-sm text-gray-500 mb-4">Teknologi: Typescript, Nuxt.js, PostgreSQL, Database Design</p>
-                        <a href="#" class="text-red-700 hover:underline font-semibold">Lihat Detail / Kunjungi Situs</a>
+                <div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 hover:border-fuchsia-500/50 transition duration-500">
+                    <div class="h-48 bg-blue-700 flex items-center justify-center"><img src="Lims.png" class="w-32" alt="LIMS"></div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-2">LIMS</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Manajemen pengujian laboratorium dengan integrasi VPN aman dan pembuatan kode sampel otomatis.</p>
+                        <p class="text-[10px] font-bold text-fuchsia-500 uppercase tracking-widest">TS, Nuxt.js, PostgreSQL</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="experience" class="py-16 md:py-24 bg-white">
-        <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Pengalaman Kerja</h2>
-            <div class="space-y-8">
-                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-red-700 mb-2">IT Staff</h3>
-                    <p class="text-lg font-semibold text-gray-800 mb-1">PT. GMJ Global Energy | Bandung, Indonesia</p>
-                    <p class="text-gray-600 mb-4">Oktober 2022 – November 2024</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li>Merancang, memprogram, dan mengimplementasikan API yang kuat untuk integrasi *front-end* yang mulus, memastikan aliran data yang handal dan efisien.</li>
-                        <li>Mengembangkan dan memelihara aplikasi web *full-stack* yang *scalable*, menerjemahkan desain UI dari Figma menjadi produk fungsional.</li>
-                        <li>Melakukan konfigurasi dan penerapan server, termasuk pengelolaan pengaturan server, penerapan kode, dan pembaruan basis data untuk mendukung kelancaran operasi beberapa aplikasi.</li>
-                        <li>Berkontribusi dalam desain web dan seluler yang berpusat pada pengguna di Figma, dengan fokus pada estetika, fungsionalitas, dan pengalaman pengguna yang intuitif.</li>
-                        <li>Menerapkan praktik dokumentasi sistem yang efisien, termasuk pembuatan panduan penggunaan dan teknis.</li>
-                        <li>Berinteraksi dengan pengguna dari unit terkait untuk mengidentifikasi kebutuhan dan mengembangkan fitur program spesifik.</li>
-                        <li>Berpartisipasi dalam perancangan arsitektur data untuk database yang diusulkan, memastikan integritas dan skalabilitas.</li>
-                        <li>Terlibat dalam penyelesaian masalah sistem yang kompleks dan *setup master data*.</li>
+    <section id="experience" class="py-24 bg-white dark:bg-slate-900">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <h2 class="text-3xl font-bold mb-16 text-center">Pengalaman Kerja</h2>
+            <div class="space-y-12">
+                <div class="relative pl-8 border-l-2 border-fuchsia-600/30">
+                    <div class="absolute w-4 h-4 bg-red-600 rounded-full -left-[9px] top-1 border-4 border-white dark:border-slate-900"></div>
+                    <h3 class="text-xl font-bold text-red-600">IT Staff</h3>
+                    <p class="font-semibold">PT. GMJ Global Energy | Bandung</p>
+                    <p class="text-xs text-slate-400 mb-4">Oktober 2022 – November 2024</p>
+                    <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-2 list-disc ml-4">
+                        <li>Merancang dan implementasi API kuat untuk integrasi front-end yang mulus.</li>
+                        <li>Mengembangkan aplikasi web full-stack yang scalable dari Figma ke fungsional.</li>
+                        <li>Konfigurasi server, penerapan kode, dan pembaruan basis data beberapa aplikasi.</li>
+                        <li>Menerapkan praktik dokumentasi sistem, panduan penggunaan, dan teknis.</li>
+                        <li>Penyelesaian masalah sistem kompleks dan setup master data.</li>
                     </ul>
                 </div>
-                <div class="bg-gray-50 p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-red-700 mb-2">Web Developer Internship</h3>
-                    <p class="text-lg font-semibold text-gray-800 mb-1">ASM Ariyanti | Bandung, Indonesia</p>
-                    <p class="text-gray-600 mb-4">Agustus 2021 – Oktober 2021</p>
-                    <ul class="list-disc list-inside text-gray-700 space-y-2">
-                        <li>Berpartisipasi dalam pengembangan web *full-stack*, merancang dan membangun aplikasi web arsip elektronik dari awal hingga pengembangan lebih lanjut, memastikan sistem yang efisien dan dapat diskalakan.</li>
-                        <li>Mengimplementasikan *backend* dan API yang andal untuk integrasi data yang lancar, meningkatkan kinerja dan keandalan aplikasi.</li>
-                        <li>Mengelola konfigurasi server, menerapkan kode, serta memperbarui dan mengoptimalkan basis data untuk mendukung performa aplikasi.</li>
-                        <li>Melakukan pemeliharaan berkelanjutan termasuk *debugging*, pengujian, serta peningkatan fitur untuk memastikan stabilitas dan efisiensi sistem.</li>
+                <div class="relative pl-8 border-l-2 border-fuchsia-600/30">
+                    <div class="absolute w-4 h-4 bg-slate-400 rounded-full -left-[9px] top-1 border-4 border-white dark:border-slate-900"></div>
+                    <h3 class="text-xl font-bold text-slate-500">Web Developer Internship</h3>
+                    <p class="font-semibold">ASM Ariyanti | Bandung</p>
+                    <p class="text-xs text-slate-400 mb-4">Agustus 2021 – Oktober 2021</p>
+                    <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-2 list-disc ml-4">
+                        <li>Membangun aplikasi web arsip elektronik dari awal.</li>
+                        <li>Implementasi backend dan API andal untuk integrasi data lancar.</li>
+                        <li>Maintenance berkelanjutan termasuk debugging dan pengujian fitur.</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="education" class="py-16 md:py-24 bg-gray-100">
+    <section id="education" class="py-24 bg-slate-50 dark:bg-slate-950">
         <div class="container mx-auto px-6 max-w-4xl">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Pendidikan</h2>
-            <div class="space-y-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-red-700 mb-2">Teknik Informatika</h3>
-                    <p class="text-lg font-semibold text-gray-800 mb-1">Universitas Sangga Buana YPKP</p>
-                    <p class="text-gray-600 mb-4">September 2023 – Sekarang</p>
-                    <p class="text-gray-700">Mahasiswa kelas karyawan, menyeimbangkan pekerjaan dan studi untuk memperluas pengetahuan di bidang teknologi informasi, dengan fokus pada pengembangan perangkat lunak, analisis sistem, dan teknologi komputasi modern.</p>
+            <h2 class="text-3xl font-bold text-center mb-16">Pendidikan</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-8 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
+                    <h3 class="font-bold text-red-600">Teknik Informatika</h3>
+                    <p class="text-sm font-semibold">Univ. Sangga Buana YPKP</p>
+                    <p class="text-xs text-slate-400 mb-4">2023 – Sekarang</p>
+                    <p class="text-xs leading-relaxed text-slate-500 italic">Fokus pada software development dan analisis sistem.</p>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-red-700 mb-2">Rekayasa Perangkat Lunak</h3>
-                    <p class="text-lg font-semibold text-gray-800 mb-1">SMK ICB Cinta Niaga</p>
-                    <p class="text-gray-600 mb-4">Juni 2022 – Juni 2023</p>
-                    <p class="text-gray-700">Memperoleh pengetahuan dasar dalam merancang, mengembangkan, dan memelihara aplikasi perangkat lunak.</p>
+                <div class="p-8 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800">
+                    <h3 class="font-bold text-red-600">Rekayasa Perangkat Lunak</h3>
+                    <p class="text-sm font-semibold">SMK ICB Cinta Niaga</p>
+                    <p class="text-xs text-slate-400 mb-4">2022 – 2023</p>
+                    <p class="text-xs leading-relaxed text-slate-500 italic">Pengetahuan dasar merancang dan memelihara aplikasi.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-16 md:py-24 bg-red-800 text-white">
-        <div class="container mx-auto px-6 text-center max-w-3xl">
-            <h2 class="text-3xl md:text-4xl font-bold mb-10">Hubungi Saya</h2>
-            <p class="text-lg mb-8">Tertarik untuk berkolaborasi? Jangan ragu untuk menghubungi saya!</p>
-            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
-                <a href="mailto:ferdiandwiputra01@gmail.com" class="bg-white text-red-800 px-8 py-4 rounded-full font-semibold hover:bg-gray-200 transition-colors shadow-lg">
-                    Email Saya
+    <footer id="contact" class="mt-24 bg-slate-900 text-white py-20 rounded-t-[3rem] border-t border-fuchsia-600/30 shadow-[0_-10px_30px_rgba(192,38,211,0.1)]">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-8 tracking-tighter">Ready to start a project?</h2>
+            
+            <div class="flex flex-wrap justify-center gap-6 mb-16">
+                <a href="mailto:ferdiandwiputra01@gmail.com" class="p-4 bg-white/5 border border-slate-700 rounded-2xl hover:bg-fuchsia-700 hover:border-fuchsia-500 transition-all duration-300 w-full sm:w-auto flex items-center justify-center">
+                    <i class="fas fa-envelope mr-2"></i> Mail Me
                 </a>
-                <a href="tel:+6283879522619" class="bg-white text-red-800 px-8 py-4 rounded-full font-semibold hover:bg-gray-200 transition-colors shadow-lg">
-                    Telepon Saya
-                </a>
-            </div>
-            <div class="mt-10 text-gray-300">
-                <p>&copy; 2025 Ferdian Dwi Putra. All rights reserved.</p>
-            </div>
-        </div>
-    </section>
 
+                <a href="https://wa.me/6283879522619" target="_blank" class="p-4 bg-white/5 border border-slate-700 rounded-2xl hover:bg-green-600 hover:border-green-400 transition-all duration-300 w-full sm:w-auto flex items-center justify-center">
+                    <i class="fab fa-whatsapp mr-2 text-xl"></i> Chat Me
+                </a>
+
+                <a href="https://www.linkedin.com/in/ferdiandwp" target="_blank" class="p-4 bg-white/5 border border-slate-700 rounded-2xl hover:bg-blue-600 hover:border-blue-400 transition-all duration-300 w-full sm:w-auto flex items-center justify-center">
+                    <i class="fab fa-linkedin mr-2"></i> LinkedIn
+                </a>
+            </div>
+            
+            <p class="text-slate-500 text-[10px] uppercase tracking-widest font-bold">&copy; 2026 Ferdian Dwi Putra. Bandung, Indonesia.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
